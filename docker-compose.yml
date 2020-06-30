@@ -1,0 +1,24 @@
+version: '3'
+
+services:
+    web:
+        build: ./web
+        container_name: webserver
+        ports: 
+        - 9000:80
+        depends_on:
+        - app
+        links:
+        - app
+        networks:
+        - app-network
+    
+    app:
+        build: ./app
+        container_name: appserver
+        networks:
+        - app-network
+
+networks:
+    app-network:
+        driver: bridge
